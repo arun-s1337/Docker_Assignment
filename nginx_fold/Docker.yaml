@@ -1,0 +1,9 @@
+ cat Dockerfile
+# Use the official Nginx image
+FROM nginx:latest
+
+# Copy custom nginx.conf into the container
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80 for the Nginx reverse proxy
+EXPOSE 80

@@ -1,0 +1,33 @@
+└─$ cat Dockerfile go.mod  main.go
+# Use the official Golang image (1.18 version)
+FROM golang:1.18-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Go module files and Go source code to the container
+COPY . .
+
+# Install Go dependencies (e.g., using go mod tidy)
+RUN go mod tidy
+
+# Expose the application port
+EXPOSE 8081
+
+# Build the Go application (compile the Go source code)
+RUN go build -o service1 .
+
+# Run the application (start the compiled Go binary)
+CMD ["./service1"]
+###########################################################################3
+module service_1
+
+go 1.18
+
+package main
+
+import "fmt"
+#####################################################################
+func main() {
+    fmt.Println("Hello, World!")
+}

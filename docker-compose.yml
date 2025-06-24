@@ -1,0 +1,33 @@
+ cat docker-compose.yml
+version: '3.8'
+
+services:
+  service_1:
+    build: ./service_1
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - service_1
+
+networks:
+  app-network:
+    driver: bridge
+
+
+     healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081"]  
+      interval: 10s   
+      retries: 3       
+      start_period: 30s  
+      timeout: 5s      
+    networks:
+      - app-network
